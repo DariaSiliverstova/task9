@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-weight: normal;
+        }
+        td input {
+            width: 30px;
+            height: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h4>Counting L letters:</h4>
+
+    <table>
+        <tr>
+            <label for="Ls">Say something! </label><input type="text" placeholder="Say here!" id="Ls"/>
+            <td><button type="button" onclick = FindL()>Looking for L's</button></td>
+            <td><p id="LCount"></p></td>
+        </tr>
+    </table>
+
+    <h4>Counting wovels:</h4>
+
+    <table>
+        <tr>
+            <label for="Wovel">Say something! </label><input type="text" placeholder="Say here!" id="Wovel"/>
+            <td><button type="button" onclick = FindNoice()>Checking for wovels</button></td>
+            <td><p id="Saying"></p></td>
+        </tr>
+    </table>
+
+    <h4>Palindrome:</h4>
+    <table>
+        <tr>
+            <label for="Palindrome">Say something! </label><input type="text" placeholder="Say here!" id="Palindrome"/>
+            <td><button type="button" onclick = Palindrome()>Checking if word is a palindrome</button></td>
+            <td><p id="palindromeWord"></p></td>
+        </tr>
+    </table>
+
+    <script>
+        function countingLs(str, char) {
+            return str.split(char).length - 1;
+        
+        }
+        function FindL(){
+            var myString = document.getElementById("Ls").value;
+            let result = myString + " contains " + String(parseInt(countingLs(myString, "l")) + parseInt(countingLs(myString, "L"))) + "xL characters."
+            document.getElementById("LCount").innerHTML = result;
+        }   
+
+
+                   
+        function FindNoice(){
+            var str = document.getElementById("Wovel").value;
+            var count = 0
+            for (var i = 0; i < str.length; i++){
+                if (["a", "e", "i", "o", "u", "y", "A", "E", "I", "O", "U", "Y"].includes(str[i])){
+                    count++
+                }
+            }
+            let result = str + " contains " + (count) + " wovels."
+            document.getElementById("Saying").innerHTML = result;
+        }   
+
+        function checker(str) {
+            str = str.toLowerCase().replaceAll(" ", '');
+            for (let i = 0; i < str.length / 2; i++) {
+                if (str[i] !== str[str.length - 1 - i]) {
+                    return 0;
+                }
+            }
+            return 1;
+        }
+
+        function Palindrome(){
+            let result
+            var str = document.getElementById("Palindrome").value;
+            if (str.length > 0){
+                if (checker(str) == 1){
+                    result = str + " is a palindrome."
+                }else{
+                    result = str + " isn't palindrome."
+                }
+            }
+            document.getElementById("palindromeWord").innerHTML = result;
+        }
+    </script>
+</body
